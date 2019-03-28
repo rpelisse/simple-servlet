@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.redhat.jboss.webapp</groupId>
-  <artifactId>simple-oom-webapp</artifactId>
+  <artifactId>simple-webapp</artifactId>
   <packaging>war</packaging>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -22,11 +22,11 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>webapp</finalName>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.2</version>
+        <version>2.4</version>
         <configuration>
             <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
