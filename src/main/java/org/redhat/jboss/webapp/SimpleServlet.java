@@ -16,6 +16,7 @@ public class SimpleServlet extends HttpServlet {
 
 	private static final String TAB = "\t";
 	private static final String PLAIN_TEXT_TYPE = "plain/text";
+	private static final String JBOSS_EAP_HOME_FOLDER_PROPERTY_NAME = "JBOSS_EAP_HOME_FOLDER";
 	private static final String UTF8_ENC = "UTF-8";
 
 	private static HttpServletResponse configureResponse(HttpServletResponse response) {
@@ -34,28 +35,23 @@ public class SimpleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
-		try {
-			response.getWriter().printf("%s", "hello");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-
+        addToResponse(response, "Request received:\n");
 		response = configureResponse(response);
-
 		addToResponse(response, "Requested URL:" + tabs(3) + request.getRequestURL());
 		response.addHeader("JBOSS_NODE_NAME", getLocalHostname());
 		addToResponse(response, "Runs on node:" +  tabs(3) + getLocalHostnameString());
 		response.addHeader("REQUESTER", request.getRemoteHost());
 		addToResponse(response, "Requested by:" + tabs(3) + getRemoteHostString(request) );
+		String propertyFile = System.getProperty(JBOSS_EAP_HOME_FOLDER_PROPERTY_NAME);
+        if ( ! "".equals(propertyFile) ) {
+            addToResponse(response, JBOSS_EAP_HOME_FOLDER_PROPERTY_NAME + ":" + tabs(2) + propertyFile);
+        }
 		response.setStatus(HttpServletResponse.SC_OK);
-		return;
+        return;
 	}
 
 	private static String getRemoteHostString(final HttpServletRequest request) {
-		return request.getRemoteHost() + " [IP: " + request.getRemoteAddr() + ", port: " + request.getRemotePort()  + " ";
+		return request.getRemoteHost() + " [IP: " + request.getRemoteAddr() + ", port: " + request.getRemotePort()  + " ]";
 	}
 
 	private static String getLocalHostname()  {
@@ -73,7 +69,6 @@ public class SimpleServlet extends HttpServlet {
 			throw new IllegalStateException("Can't add retrieve local hostname ! Something is quite wrong server side.");
 		}
 	}
-
 
 	private static String getLocalHostnameString()  {
 			return getLocalHostname() + " [IP: " + getLocalHostIP() + " ]" ;
