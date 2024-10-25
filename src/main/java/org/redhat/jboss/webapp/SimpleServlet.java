@@ -16,9 +16,8 @@ public class SimpleServlet extends HttpServlet {
 
 	private static final String TAB = "\t";
 	private static final String PLAIN_TEXT_TYPE = "plain/text";
-	//private static final String PLAIN_TEXT_TYPE = "text/html";
 	private static final String UTF8_ENC = "UTF-8";
-    private static final String BUILT_FOR = "JBoss EAP 7.4";
+    private static final String BUILT_FOR = "JBoss EAP 7";
 
 	private static HttpServletResponse configureResponse(HttpServletResponse response) {
 		response.setContentType(PLAIN_TEXT_TYPE);
@@ -35,22 +34,14 @@ public class SimpleServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-
-		try {
-			response.getWriter().printf("%s", "hello");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-
 		response = configureResponse(response);
-/*
+
 		addToResponse(response, "Requested URL:" + tabs(3) + request.getRequestURL());
 		response.addHeader("JBOSS_NODE_NAME", getLocalHostname());
 		addToResponse(response, "Runs on node:" +  tabs(3) + getLocalHostnameString());
 		response.addHeader("REQUESTER", request.getRemoteHost());
-		addToResponse(response, "Requested by:" + tabs(3) + getRemoteHostString(request) );*/
+		addToResponse(response, "Requested by:" + tabs(3) + getRemoteHostString(request) );
         addToResponse(response, "Hey, look! I'm a super-cool app deployed by Ansible! (build for " + BUILT_FOR + ")");
 		response.setStatus(HttpServletResponse.SC_OK);
 		return;
