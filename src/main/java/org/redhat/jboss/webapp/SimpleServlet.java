@@ -14,9 +14,11 @@ public class SimpleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+    private static final String APP_VERSION = "1.3";
 	private static final String TAB = "\t";
 	private static final String PLAIN_TEXT_TYPE = "plain/text";
 	//private static final String PLAIN_TEXT_TYPE = "text/html";
+    private static final String WILDFLY_CLUSTER_CONFIG = "WILDFLY_CLUSTER_CONFIG";
 	private static final String UTF8_ENC = "UTF-8";
 
 	private static HttpServletResponse configureResponse(HttpServletResponse response) {
@@ -35,22 +37,11 @@ public class SimpleServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
-		try {
-			response.getWriter().printf("%s", "hello");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-
 		response = configureResponse(response);
-/*
-		addToResponse(response, "Requested URL:" + tabs(3) + request.getRequestURL());
-		response.addHeader("JBOSS_NODE_NAME", getLocalHostname());
-		addToResponse(response, "Runs on node:" +  tabs(3) + getLocalHostnameString());
-		response.addHeader("REQUESTER", request.getRemoteHost());
-		addToResponse(response, "Requested by:" + tabs(3) + getRemoteHostString(request) );*/
-        addToResponse(response, "Hey, look! I'm a super-cool app deployed by Ansible! (v1.1)");
+
+		addToResponse(response, WILDFLY_CLUSTER_CONFIG + System.getProperty(WILDFLY_CLUSTER_CONFIG) );
+        addToResponse(response, "Info App Version: v" + APP_VERSION);
 		response.setStatus(HttpServletResponse.SC_OK);
 		return;
 	}
