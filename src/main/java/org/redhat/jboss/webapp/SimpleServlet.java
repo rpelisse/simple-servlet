@@ -40,7 +40,7 @@ public class SimpleServlet extends HttpServlet {
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response = configureResponse(response);
 
-		addToResponse(response, WILDFLY_CLUSTER_CONFIG + System.getProperty(WILDFLY_CLUSTER_CONFIG) );
+		addToResponse(response, WILDFLY_CLUSTER_CONFIG + ": " + System.getProperty(WILDFLY_CLUSTER_CONFIG) );
         addToResponse(response, "Info App Version: v" + APP_VERSION);
 		response.setStatus(HttpServletResponse.SC_OK);
 		return;
