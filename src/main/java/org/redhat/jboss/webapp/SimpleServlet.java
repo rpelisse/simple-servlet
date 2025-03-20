@@ -34,13 +34,10 @@ public class SimpleServlet extends HttpServlet {
 		return tabs.toString();
 	}
 
-
-    public SimpleServlet() {
-        throw new IllegalStateException();
-    }
-
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        if ( request != null )
+            throw new IllegalStateException();
 
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response = configureResponse(response);
