@@ -14,7 +14,7 @@ public class SimpleServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-    private static final String APP_VERSION = "1.3";
+    private static final String APP_VERSION = "1.4.1";
 	private static final String TAB = "\t";
 	private static final String PLAIN_TEXT_TYPE = "plain/text";
 	//private static final String PLAIN_TEXT_TYPE = "text/html";
@@ -36,8 +36,8 @@ public class SimpleServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        if ( request != null )
-            throw new IllegalStateException();
+        //if ( request != null )
+        //    throw new IllegalStateException();
 
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response = configureResponse(response);
