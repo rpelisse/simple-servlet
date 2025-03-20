@@ -6,7 +6,7 @@
     <groupId>org.redhat.jboss.webapp</groupId>
     <artifactId>info</artifactId>
     <packaging>war</packaging>
-    <version>1.3</version>
+    <version>1.4</version>
     <name>A simple infoapp</name>
 
     <properties>

@@ -34,6 +34,11 @@ public class SimpleServlet extends HttpServlet {
 		return tabs.toString();
 	}
 
+
+    public SimpleServlet() {
+        throw new IllegalStateException();
+    }
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
