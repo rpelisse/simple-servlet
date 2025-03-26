@@ -18,7 +18,7 @@ public class SimpleServlet extends HttpServlet {
 	private static final String TAB = "\t";
 	private static final String PLAIN_TEXT_TYPE = "plain/text";
 	//private static final String PLAIN_TEXT_TYPE = "text/html";
-    private static final String WILDFLY_CLUSTER_CONFIG = "WILDFLY_CLUSTER_CONFIG";
+    private static final String JBOSS_ID = "JBOSS_ID";
 	private static final String UTF8_ENC = "UTF-8";
 
 	private static HttpServletResponse configureResponse(HttpServletResponse response) {
@@ -40,7 +40,9 @@ public class SimpleServlet extends HttpServlet {
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response = configureResponse(response);
 
-		addToResponse(response, WILDFLY_CLUSTER_CONFIG + ": " + System.getProperty(WILDFLY_CLUSTER_CONFIG) );
+        String jbossId = System.getProperty(JBOSS_ID);
+        if ( jbossId != null && ! "".equals(jbossId) )
+		    addToResponse(response, JBOSS_ID + ": " + jbossId);
         addToResponse(response, "Info App Version: v" + APP_VERSION);
 		response.setStatus(HttpServletResponse.SC_OK);
 		return;
